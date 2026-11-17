@@ -1,0 +1,22 @@
+services:
+  dev:
+    build:
+      context: .
+      target: dev
+    command: npm run dev -- --host 0.0.0.0
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      NODE_ENV: development
+    init: true
+
+  prod:
+    build:
+      context: .
+      target: prod
+    ports:
+      - "8081:80"
+    restart: unless-stopped
